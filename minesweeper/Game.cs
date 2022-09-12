@@ -11,7 +11,6 @@ namespace minesweeper
     {
         public string[] size;
         public int bombCount;
-
         public void StartGame()
         {
             for (int i = 0; i < 1; i++)
@@ -35,7 +34,7 @@ namespace minesweeper
                 Console.WriteLine("How many bombs would you like?");
                 string bombCheck = Console.ReadLine();
 
-                if (!Regex.IsMatch(bombCheck, @"^[0-9]{1,2}$") || bombCheck == "0")
+                if (!Regex.IsMatch(bombCheck, @"^[0-9]{1,2}$") || bombCheck == "0" || int.Parse(bombCheck) > int.Parse(size[0]) * int.Parse(size[1]) - 1)
                 {
                     Console.WriteLine("Invalid amount");
                     i--;
@@ -45,6 +44,12 @@ namespace minesweeper
                     bombCount = int.Parse(bombCheck);
                 }
             }
+
+            Grid MineGrid = new Grid(size, bombCount);
+        }
+
+        public void PlayerMove()
+        {
 
         }
     }

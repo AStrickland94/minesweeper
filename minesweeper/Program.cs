@@ -6,12 +6,17 @@ namespace minesweeper
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Please enter the desired board size with an x");
-            string[] size = Console.ReadLine().Split('x');
-            
-            Console.WriteLine("How many bombs would you like?");
-            int bombCount = int.Parse(Console.ReadLine());
+            bool play = true;
 
+            while (play == true)
+            {
+                Game Game = new Game();
+
+                Game.StartGame();
+            };
+            
+
+            /*
             Grid MineGrid = new Grid(size, bombCount);
 
             MineGrid.DisplayGrid();
@@ -53,6 +58,7 @@ namespace minesweeper
 
                 MineGrid.DisplayGrid();
             }
+            */
         }
     }
 }

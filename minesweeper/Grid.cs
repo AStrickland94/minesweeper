@@ -8,6 +8,64 @@ namespace minesweeper
 {
     internal class Grid
     {
+        public Tile[,] MineGrid;
+
+        public Grid(string[] size, int bombCount)
+        {
+            MineGrid = new Tile[int.Parse(size[0]), int.Parse(size[1])];
+
+            for (int i = 0; i < MineGrid.GetLength(0); i++)
+            {
+                for (int j = 0; j < MineGrid.GetLength(1); j++)
+                {
+                    MineGrid[i, j] = new Tile();
+                }
+            }
+
+            bombInit(bombCount);
+        }
+
+        void bombInit(int bombCount)
+        {
+            for (int i = 0; i < bombCount; i++)
+            {
+                Random rnd = new Random();
+
+                int rndx = rnd.Next(MineGrid.GetLength(0));
+                int rndy = rnd.Next(MineGrid.GetLength(1));
+
+                if (MineGrid[rndx, rndy].IsBomb != true)
+                {
+                    MineGrid[rndx, rndy].IsBomb = true;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+        }
+
+        public void DisplayGrid()
+        {
+            for (int i = 0; i < MineGrid.GetLength(0); i++)
+            {
+                for (int j = 0; j < MineGrid.GetLength(1); j++)
+                {
+                    if (MineGrid[i,j].AdjCount >= 0)
+                    {
+                        Console.Write(MineGrid[i, j].AdjCount + " ");
+                    }
+                    else
+                    {
+                        Console.Write("X ");
+                    }
+                    
+                }
+                Console.WriteLine();
+            }
+        }
+
+        /*
         public int[,] MineGrid;
         public char[,] VisGrid;
         public int TotalMoves;
@@ -135,5 +193,6 @@ namespace minesweeper
             return 0;
 
         }
+        */
     }
 }
